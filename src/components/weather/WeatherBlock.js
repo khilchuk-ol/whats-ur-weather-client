@@ -33,6 +33,10 @@ function WeatherBlock(props) {
       return [false, "City name cannot be numeric"];
     }
 
+    if (val.length > 45) {
+      return [false, "City name cannot be longer than 45 characters"];
+    }
+
     return [true, null];
   };
 
