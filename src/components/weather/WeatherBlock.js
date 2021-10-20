@@ -7,6 +7,12 @@ import weatherServices from "../../services/weather.service.js";
 import Spinner from "../UI/Spinner.js";
 import WeatherInfoCard from "./WeatherInfoCard.js";
 
+const isCityEnglOnly = (city) => {
+  const alphaEngl = /^[A-Za-z - ]$/;
+
+  return alphaEngl.test(city);
+};
+
 function WeatherBlock(props) {
   const [cityState, setCityState] = useState({
     city: "",
@@ -35,6 +41,10 @@ function WeatherBlock(props) {
 
     if (val.length > 45) {
       return [false, "City name cannot be longer than 45 characters"];
+    }
+
+    if (!isCityEnglOnly(val)) {
+      return [false, "City name can contain only English letters"];
     }
 
     return [true, null];
